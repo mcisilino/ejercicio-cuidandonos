@@ -1,0 +1,30 @@
+public class CalculadoraTiempoParcial {
+	private AdapterCalculadoraDistancia adapterDistancia;
+	private Integer distancia;
+
+	public Integer calcularTiempoEntre(Direccion origen, Direccion destino) {
+		distancia = adapterDistancia.calcularDistanciaEnMetros(origen, destino);
+		
+		//cada 100 metros 2 minutos
+		return (distancia/100)*2
+	}
+}
+
+public class CalculadoraTiempoTotal {
+	private List<Integer> demorasParciales;
+	
+	public Direccion obtenerDireccion(List<Destino> listaDestinos, Integer posicion) {
+		return (listaDestinos.get(posicion).getDireccion());
+	}
+
+	public Integer calcularTiempoTotal (Direccion origen, List<Destino> listaDestinos) {
+		demorasParciales.add(calcularTiempoEntre(origen,obtenerDireccion(listaDestinos,0)) + listaDestinos.getFirst().getTiempoDemora());
+	    
+	    for (Integer i=1; i<listaDestinos.size(); i++) {
+	        demorasParciales.add(calcularTiempoEntre(obtenerDireccion(listaDestinos,i),obtenerDireccion(listaDestinos,i+1)) + listaDestinos.get(i+1).getTiempoDemora());
+	    }
+    
+	    return (demorasParciales.sumList());
+	}
+}
+
